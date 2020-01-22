@@ -1,0 +1,27 @@
+Project details:
+
+ü  There would be two entities :
+
+1. Department –id, department_code (length 5), name (length 30), active (boolean)))
+
+2. Employee - id, name (length 30), photo (dictory_path),  joining_date, date_of_birth, designation (length 20), basic_salary, gender (Enum – Male/female), department_id
+
+ 
+
+ü  Must provide proper relation between Department and Employee.
+
+ü  CRUD functionality should be provided for the department and employee where have an entry form, a view page, edit page and a list page. List page will show all fields.
+
+ü  A report should be implemented to show the employee list which should be download on pdf format (iReport/Birt/any other report tool).
+
+ü  Employee entry screen must have a drop-down to select department.
+
+ü  Naming conversion should apply properly
+
+ü  Pagination should be implemented.
+
+ü  Technology should be implemented: Spring boot, Spring data jpa,  Any relational database
+
+ü  Proper annotation should be applied.
+
+ü  Application.yml file will be the configuration file for the project.

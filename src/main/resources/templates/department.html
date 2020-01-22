@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Welcome | Department</title>
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+        <style>
+            body {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        </style>
+    </head>
+    <body ng-controller="DepartmentController" data-ng-init="init()">
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/department}">Department</a>
+            </li>
+        </ul>
+
+        <div class="col">
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#Id</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="department in departments">
+                        <td>{{ department.id }}</td>
+                        <td>{{ department.departmentCode }}</td>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.active }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning" ng-click="EditDepartment(department.id)">Edit</button>
+                            <button class="btn btn-sm btn-danger" ng-click="DeleteDepartment(department.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div class="col">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Add New</h5>
+                            <form>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Name: <input type="text" ng-model="name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Code: <input type="text" ng-model="departmentCode" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-success" ng-click="AddDepartment()">Save</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Add New</h5>
+                            <form>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Name: <input type="text" ng-model="uname" />
+                                            <input type="hidden" ng-model="uid" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Code: <input type="text" ng-model="udepartmentCode" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="radio" ng-model="uactive" value="active" /> Active
+                                            <input type="radio" ng-model="uactive" value="inactive" /> Inactive
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-info" ng-click="UpdateDepartment()">Update</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- JQuery -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}" type="text/javascript">
+        </script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" type="text/javascript">
+        </script>
+        <!-- AngularJS -->
+        <script th:src="@{/vendor/angular/angular.js}" type="text/javascript">
+        </script>
+        <!-- Controller -->
+        <script th:src="@{/controller/DepartmentController.js}" type="text/javascript">
+        </script>
+    </body>
+</html>
+

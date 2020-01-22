@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Welcome | Home</title>
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <style>
+            body {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        </style>
+    </head>
+    <body ng-controller="EmployeeController" data-ng-init="init()">
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/department}">Department</a>
+            </li>
+        </ul>
+
+        <div class="col">
+            <div class="row">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#Id</th>
+                            <th>Department</th>
+                            <th>Name</th>
+                            <th>Photo</th>
+                            <th>Joining Date</th>
+                            <th>Date of Birth</th>
+                            <th>Designation</th>
+                            <th>Basic Salary</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="employee in employees">
+                            <td>{{ employee.id }}</td>
+                            <td>{{ employee.department.name }}</td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.photo }}</td>
+                            <td>{{ employee.joiningDate }}</td>
+                            <td>{{ employee.dateOfBirth }}</td>
+                            <td>{{ employee.designation }}</td>
+                            <td>{{ employee.basicSalary }}</td>
+                            <td>{{ employee.gender }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" ng-click="EditEmployee(employee.id)">Edit</button>
+                                <button class="btn btn-sm btn-danger" ng-click="DeleteEmployee(employee.id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="10">
+                                <button class="btn btn-block btn-primary" ng-click="Report()">Report</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Add New</h5>
+                            <form>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Name: <input type="text" ng-model="name" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Department:
+                                            <select ng-model="department">
+                                                <option ng-repeat="department in departments" value="{{department}}">
+                                                    {{ department.name }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Photo: <input type="file" ng-model="photo" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Join Date: <input type="date" ng-model="joiningDate" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Date of Birth: <input type="date" ng-model="dateOfBirth" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Designation: <input type="text" ng-model="designation" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Basic Salary: <input type="text" ng-model="basicSalary" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Gender:
+                                            <select ng-model="gender">
+                                                <option value="FEMALE">FEMALE</option>
+                                                <option value="MALE">MALE</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-success" ng-click="AddEmployee()">Save</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Update</h5>
+                            <form>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Name: <input type="text" ng-model="uname" />
+                                            <input type="hidden" ng-model="uid" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Department:
+                                            <select ng-model="udepartment">
+                                                <option ng-repeat="department in departments" value="{{department}}">
+                                                    {{ department.name }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Photo: <input type="file" ng-model="uphoto" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Join Date: <input type="date" ng-model="ujoiningDate" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Date of Birth: <input type="date" ng-model="udateOfBirth" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Designation: <input type="text" ng-model="udesignation" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Basic Salary: <input type="text" ng-model="ubasicSalary" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Gender:
+                                            <select ng-model="ugender">
+                                                <option value="FEMALE">FEMALE</option>
+                                                <option value="MALE">MALE</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-block btn-info" ng-click="UpdateEmployee()">Update</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- JQuery -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}" type="text/javascript">
+        </script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" type="text/javascript">
+        </script>
+        <!-- AngularJS -->
+        <script th:src="@{/vendor/angular/angular.js}" type="text/javascript">
+        </script>
+        <!-- Controller -->
+        <script th:src="@{/controller/EmployeeController.js}" type="text/javascript">
+        </script>
+    </body>
+</html>
