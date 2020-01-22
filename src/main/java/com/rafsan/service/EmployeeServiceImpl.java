@@ -50,6 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employee.getPhoto(),
                 employee.getJoiningDate(),
                 employee.getDateOfBirth(),
+                employee.getDesignation(),
                 employee.getBasicSalary(),
                 employee.getGender(),
                 employee.getId()

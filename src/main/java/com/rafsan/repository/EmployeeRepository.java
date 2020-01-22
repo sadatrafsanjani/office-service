@@ -29,6 +29,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
                 String photo,
                 String joiningDate,
                 String dateOfBirth,
+                String designation,
                 double basicSalary,
                 Gender gender,
                 long id);

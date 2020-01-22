@@ -108,7 +108,7 @@ app.controller("EmployeeController", ["$scope", "$http", function($scope, $http)
                     let employee = success.data;
                     $scope.uid = employee.id;
                     $scope.uname = employee.name;
-                    $scope.udepartment = employee.department.name;
+                    $scope.udepartment = employee.department;
                     $scope.ujoiningDate = employee.joiningDate;
                     $scope.udateOfBirth = employee.dateOfBirth;
                     $scope.udesignation = employee.designation;
@@ -125,6 +125,7 @@ app.controller("EmployeeController", ["$scope", "$http", function($scope, $http)
 
         let employee = {
 
+            id: $scope.uid,
             name: $scope.uname,
             department: JSON.parse($scope.udepartment),
             photo: './uploads/' + Math.random().toString(36).substr(2, 10) + '.jpg',
